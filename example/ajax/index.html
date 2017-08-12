@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>Ajax Example - Zipcoder</title>
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+
+<form action="" method="post">
+	<input type="number" name="zipcode" id="zipcode" min="1000" max="9999" />
+	<input type="text" name="city" id="city" />
+</form>
+
+<script type="text/javascript">
+$("#zipcode").keyup(function() {
+	var zip = $(this).val();
+	
+	if (zip >= 1000) {
+		$.ajax({
+			method: "GET",
+			url: "php/ajax_page.php",
+			data: { zipcode: $(this).val() }
+		}).done(function(data) {
+			var city = JSON.parse(data);
+			$("#city").val(city);
+		});
+	}
+});
+</script>
+</body>
+</html>
